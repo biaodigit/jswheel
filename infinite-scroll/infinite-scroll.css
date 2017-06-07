@@ -1,0 +1,35 @@
+.scroll-header{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 44px;
+    line-height: 44px;
+    box-sizing: border-box;
+    text-align: center;
+    background-color: rgba(0,0,0,0.1);
+}
+.scroll-header p{
+    font-size: 20px;
+}
+.scroll-block-wrapper{
+    position: absolute;
+    overflow-y: auto;
+    top: 44px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.scroll-wrapper{
+    font-size: 17px;
+}
+.scroll-list-item{
+    line-height: 40px;
+    border-bottom: 1px solid #cdcdcd;
+    padding-left: 10px;
+}
+.preload-text{
+    display: none;
+    line-height: 40px;
+    text-align: center;
+}
