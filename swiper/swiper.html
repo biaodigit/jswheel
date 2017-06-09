@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .public-container{
+        position: relative;
+        margin: 0 auto;
+        width: 1000px;
+    }
+    .index-banner{
+        height: 300px;
+        overflow: hidden;
+    }
+    #list{
+        position: absolute;
+        width: 7000px;
+        height: 300px;
+        z-index:1;
+    }
+    #list img{
+        width: 1000px;
+        height: 300px;
+        float: left;
+    }
+    .arrow {
+        position: absolute;
+        display: none;
+        top: 120px;
+        width: 40px;
+        height: 60px;
+        line-height: 59px;
+        text-align: center;
+        font-size: 44px;
+        z-index: 2;
+        background-color: RGBA(0,0,0,.3);
+        color: #fff;
+        cursor: pointer;
+    }
+    .index-banner:hover .arrow{
+        display: block;
+    }
+    .arrow:hover{
+        background-color: RGBA(0,0,0,.7);
+    }
+    #next{
+        right: 0;
+    }
+    #button {
+        position: absolute;
+        height: 10px;
+        width: 80px;
+        z-index: 2;
+        bottom: 20px;
+        left: 460px;
+    }
+    #button span {
+        cursor: pointer;
+        float: left;
+        border: 1px solid #fff;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #333;
+        margin-right: 5px;
+    }
+    #button #noright{
+        margin-right: 0; !important;
+    }
+    #button .on {
+        background: #AA0000;
+    }
+</style>
+<body>
+<div class="public-container index-banner" id="index-banner">
+    <div id="list" class="clearfix" style="left: -1000px">
+        <img src="5-1.jpg">
+        <img src="1-1.jpg">
+        <img src="2.jpg">
+        <img src="3.jpg">
+        <img src="4.png">
+        <img src="5-1.jpg">
+        <img src="1-1.jpg">
+    </div>
+    <div id="button">
+        <span index="1" class="on"></span>
+        <span index="2"></span>
+        <span index="3"></span>
+        <span index="4"></span>
+        <span index="5" id="noright"></span>
+    </div>
+    <a href="javascript:;" id="prev" class="arrow">&lt;</a>
+    <a href="javascript:;" id="next" class="arrow">&gt;</a>
+</div>
+<script src="swiper.js"></script>
+</body>
+</html>
