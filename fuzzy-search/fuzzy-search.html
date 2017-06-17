@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    body, html {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+    }
+
+    ul, li {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .search {
+        position: relative;
+        width: 700px;
+        margin: 0 auto;
+        top: 40%;
+    }
+
+    input {
+        width: 600px;
+        height: 25px;
+    }
+
+    .search-list {
+        position: absolute;
+        width: 604px;
+        margin-top: 32px;
+        border: 1px solid #EEEEEE;
+    }
+
+    .btn {
+        width: 80px;
+        height: 27px;
+        border: 1px solid #cdcdcd;
+        border-radius: 10px;
+        background: #fff;
+    }
+
+    .search-list li {
+        line-height: 30px;
+        padding: 0 10px;
+
+    }
+
+    .search-list li:hover {
+        background: #EEEEEE;
+    }
+</style>
+<body>
+<div class="search">
+    <ul class="search-list" id="list" style="display: none">
+
+    </ul>
+    <input type="text">
+    <button class="btn">搜索</button>
+</div>
+<script src="fuzzy-search.js"></script>
+</body>
+</html>
