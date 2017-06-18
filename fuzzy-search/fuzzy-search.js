@@ -2,11 +2,12 @@
  * Created by di on 2017/6/17.
  */
 let btn = document.querySelector("button");
+let txt = document.querySelector("input");
 let arr = ['哈哈哈哈蜜瓜', '哈哈哈', '啦啦啦', 'lalla'];
 
 let search = {
     text: function () {
-        return document.querySelector('input').value;
+        return txt.value;
     },
     searchValue: function () {
         let reg = new RegExp(this.text());
@@ -17,7 +18,7 @@ let search = {
         for (let i = 0; i < arr.length; i++) {
             if (reg.test(arr[i])) {
                 let ali = document.createElement("li");
-                ali.innerHTML = arr[i].replace(reg,"<span class='searchtxt'>"+reg.exec(this.text())+"</span>");
+                ali.innerHTML = arr[i].replace(reg, "<span class='searchtxt'>" + this.text() + "</span>");
                 list.appendChild(ali);
                 search = true;
             }
@@ -33,4 +34,9 @@ let search = {
 
 btn.addEventListener("click", function () {
     search.searchValue();
+});
+txt.addEventListener("keydown", function (e) {
+    if (e.keyCode == 13) {
+        search.searchValue();
+    }
 })
