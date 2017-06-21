@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //通用柯里化函数
+    let currying = function (fn) {
+        let args = [];
+
+        return function () {
+            if (arguments.length == 0) {
+                return fn.apply(this, args);
+            } else {
+                if (arguments.length == 1) {
+                    [].push.apply(args, arguments);
+                    return arguments.callee;
+                }
+            }
+        }
+    }
+
+    let cost = function () {
+        let money = 0;
+
+        for (let i = 0; i < arguments.length; i++) {
+            money += arguments[i];
+        }
+        return money;
+
+    }
+
+    cost = currying(cost);
+    cost(100);
+    cost(200);
+    cost(300);
+    cost(400);
+    console.log(cost());   //1000
+</script>
+</body>
+</html>
