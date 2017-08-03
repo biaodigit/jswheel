@@ -18,7 +18,7 @@ let human = function (people) {
     }, 0)
 }
 human.prototype.next = function () {
-    if (this.tasks.length == 0) {
+    if (this.tasks.length === 0) {
         return;
     }
     let fn = this.tasks.shift();
