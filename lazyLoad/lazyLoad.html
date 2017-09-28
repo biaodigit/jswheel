@@ -29,13 +29,13 @@
 </body>
 <script>
     //函数节流
-    function throttle(fn, delay, latest) {
+    function throttle(fn, delay, atleast) {
         let startTime = new Date()
 
         return function () {
             let curTime = new Date()
 
-            if (curTime - startTime < latest) {
+            if (curTime - startTime > atleast) {
                 startTime = curTime
                 fn()
             } else {
