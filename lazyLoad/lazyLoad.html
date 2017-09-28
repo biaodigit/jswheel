@@ -28,40 +28,58 @@
 <img src="images/loading.gif" data-src="images/wechat.png">
 </body>
 <script>
-    function throttle(fn,delay,latest) {
-        var timeout = null,
-            startTime = new Date()
+    //函数节流
+    function throttle(fn, delay, latest) {
+        let startTime = new Date()
 
         return function () {
-            var curTime = new Date()
+            let curTime = new Date()
 
-            if(curTime - startTime < latest){
+            if (curTime - startTime < latest) {
                 startTime = curTime
                 fn()
-            }else{
-                setTimeout(fn,delay)
+            } else {
+                setTimeout(fn, delay)
             }
         }
     }
-    function lazyload() {
-        var images = document.getElementsByTagName('img');
-        var len    = images.length;
-        var n      = 0;      //存储图片加载到的位置，避免每次都从第一张图片开始遍历
-        return function() {
-            var seeHeight = document.documentElement.clientHeight;
-            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-            for(var i = n; i < len; i++) {
-                if(images[i].offsetTop < seeHeight + scrollTop - 50) {
-                    if(images[i].getAttribute('src') === 'images/loading.gif') {
+    //函数去抖
+    function deBounce(fn, delay) {
+        let timer = null
+
+        return function () {
+            let self = this,
+                args = arguments
+            clearTimeout(timer)
+            timer = setTimeout(function (timer) {
+                console.log('去抖成功')
+                console.log(self)
+                fn.apply(self, args)
+            }, delay)
+        }
+    }
+
+    function lazyLoad() {
+        let images = document.getElementsByTagName('img');
+        let len = images.length;
+        let n = 0;      //存储图片加载到的位置，避免每次都从第一张图片开始遍历
+        return function () {
+            let seeHeight = document.documentElement.clientHeight;
+            let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            for (let i = n; i < len; i++) {
+                if (images[i].offsetTop < seeHeight + scrollTop - 50) {
+                    if (images[i].getAttribute('src') === 'images/loading.gif') {
                         images[i].src = images[i].getAttribute('data-src');
                     }
-                    n = n + 1;
+                    n++;
                 }
             }
         }
     }
-    var loadImages = lazyload();
+
+    let loadImages = lazyLoad();
     loadImages();          //初始化首页的页面图片
-    window.addEventListener('scroll', throttle(loadImages,500,1000), false);
+    window.addEventListener('scroll', throttle(loadImages, 500, 1000), false);
+
 </script>
 </html>
