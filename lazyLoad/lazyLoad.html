@@ -2,9 +2,66 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>lazyLoad</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
 </head>
+<style>
+    img {
+        display: block;
+        /*margin-bottom: 50px;*/
+        height: 100px;
+        width: 100px;
+    }
+</style>
 <body>
-$END$
+<img src="images/loading.gif" data-src="images/wechat.png">
+<img src="images/loading.gif" data-src="images/wechat.png">
+<img src="images/loading.gif" data-src="images/wechat.png">
+<img src="images/loading.gif" data-src="images/wechat.png">
+<img src="images/loading.gif" data-src="images/wechat.png">
+<img src="images/loading.gif" data-src="images/wechat.png">
+<img src="images/loading.gif" data-src="images/wechat.png">
+<img src="images/loading.gif" data-src="images/wechat.png">
+<img src="images/loading.gif" data-src="images/wechat.png">
+<img src="images/loading.gif" data-src="images/wechat.png">
+<img src="images/loading.gif" data-src="images/wechat.png">
+<img src="images/loading.gif" data-src="images/wechat.png">
 </body>
+<script>
+    function throttle(fn,delay,latest) {
+        var timeout = null,
+            startTime = new Date()
+
+        return function () {
+            var curTime = new Date()
+
+            if(curTime - startTime < latest){
+                startTime = curTime
+                fn()
+            }else{
+                setTimeout(fn,delay)
+            }
+        }
+    }
+    function lazyload() {
+        var images = document.getElementsByTagName('img');
+        var len    = images.length;
+        var n      = 0;      //存储图片加载到的位置，避免每次都从第一张图片开始遍历
+        return function() {
+            var seeHeight = document.documentElement.clientHeight;
+            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            for(var i = n; i < len; i++) {
+                if(images[i].offsetTop < seeHeight + scrollTop - 50) {
+                    if(images[i].getAttribute('src') === 'images/loading.gif') {
+                        images[i].src = images[i].getAttribute('data-src');
+                    }
+                    n = n + 1;
+                }
+            }
+        }
+    }
+    var loadImages = lazyload();
+    loadImages();          //初始化首页的页面图片
+    window.addEventListener('scroll', throttle(loadImages,500,1000), false);
+</script>
 </html>
