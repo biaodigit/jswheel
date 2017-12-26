@@ -8,35 +8,39 @@
 <script>
     //通用柯里化函数
     let currying = function (fn) {
-        let args = [];
-
+        let args = []
         return function () {
-            if (arguments.length === 0) {
-                return fn.apply(this, args);
+            if (arguments.length) {
+                args = args.concat([].slice.call(arguments))
+                return arguments.callee
             } else {
-                if (arguments.length === 1) {
-                    [].push.apply(args, arguments);
-                    return arguments.callee;
-                }
+                console.log(this)
+                return fn.apply(this, args)
             }
         }
     }
 
     //IIFE，封闭函数内部变量
     let cost = (function () {
-        let money = 0;
-
+        let sum = 0
         return function () {
             for (let i = 0; i < arguments.length; i++) {
-                money += arguments[i];
+                sum += arguments[i]
             }
-            return money;
+            return sum
         }
-
     })()
 
     cost = currying(cost);
-    console.log(cost(100)(200)(300)(400)());   //1000
+    console.log(cost(100, 100)(200)(300)(400)());   //1000
+
+    function mul(x) {
+        const result = (y) => mul(x + y)
+        result.valueOf = () => x
+        return result
+    }
+
+    console.log(mul(1)(2)(3))
 </script>
 </body>
 </html>
